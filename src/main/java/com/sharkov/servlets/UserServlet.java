@@ -1,6 +1,6 @@
 package com.sharkov.servlets;
 
-import com.sharkov.database.QueryExecutor;
+import com.sharkov.database.UserJDBCDao;
 import com.sharkov.entity.Person;
 import com.sharkov.templater.PageGenerator;
 
@@ -18,8 +18,8 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> pageVariables = new HashMap<>();
         List<Person> list;
-        QueryExecutor queryExecutor = new QueryExecutor();
-        list = queryExecutor.getAllPersons();
+        UserJDBCDao userJDBCDao = new UserJDBCDao();
+        list = userJDBCDao.getAllPersons();
 
         pageVariables.put("users", list);
         resp.getWriter().println(PageGenerator.instance().getPage("users.html", pageVariables));

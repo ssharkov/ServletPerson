@@ -1,6 +1,6 @@
 package com.sharkov.servlets;
 
-import com.sharkov.database.QueryExecutor;
+import com.sharkov.database.UserJDBCDao;
 import com.sharkov.entity.Person;
 import com.sharkov.templater.PageGenerator;
 
@@ -18,7 +18,7 @@ public class AddUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> pageVariables = new HashMap<>();
         List<Person> list;
-        QueryExecutor dataBase = new QueryExecutor();
+        UserJDBCDao dataBase = new UserJDBCDao();
         list = dataBase.getAllPersons();
 
         pageVariables.put("users", list);
@@ -27,18 +27,14 @@ public class AddUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<String, Object> pageVariables = new HashMap<>();
-        QueryExecutor queryExecutor = new QueryExecutor();
-
+        UserJDBCDao userJDBCDao = new UserJDBCDao();
 
         Person person = new Person();
         person.setName(req.getParameter("name"));
         person.setLastName(req.getParameter("lastname"));
         person.setSalary(Integer.parseInt(req.getParameter("salary")));
-        queryExecutor.insert(person);
+        userJDBCDao.insert(person);
 
-        resp.getWriter().println(PageGenerator.instance().getPage("adduser.html", pageVariables));
         resp.sendRedirect("http://localhost:3000/users");
-
     }
 }

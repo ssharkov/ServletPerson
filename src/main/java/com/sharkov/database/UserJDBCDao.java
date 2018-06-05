@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QueryExecutor {
+public class UserJDBCDao {
     public List<Person> getAllPersons() {
         Statement statement = establishConnection();
         List<Person> list = new ArrayList<>();
@@ -48,7 +48,7 @@ public class QueryExecutor {
     }
 
     private Statement establishConnection() {
-        Connection connection = null;
+        Connection connection;
         Statement statement = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");

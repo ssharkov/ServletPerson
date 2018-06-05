@@ -6,13 +6,6 @@ public class Person {
         private String lastName;
         private int salary;
 
-    public Person(long id, String name, String lastName, int salary) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.salary = salary;
-    }
-
     public Person() {
     }
 
