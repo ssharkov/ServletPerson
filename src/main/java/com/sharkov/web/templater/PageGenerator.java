@@ -1,4 +1,4 @@
-package com.sharkov.templater;
+package com.sharkov.web.templater;
 
 
 import freemarker.template.Configuration;

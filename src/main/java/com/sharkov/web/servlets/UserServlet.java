@@ -1,8 +1,8 @@
-package com.sharkov.servlets;
+package com.sharkov.web.servlets;
 
-import com.sharkov.database.UserJDBCDao;
 import com.sharkov.entity.Person;
-import com.sharkov.templater.PageGenerator;
+import com.sharkov.service.PersonService;
+import com.sharkov.web.templater.PageGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,14 +14,22 @@ import java.util.List;
 import java.util.Map;
 
 public class UserServlet extends HttpServlet {
+
+    private PersonService personService;
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> pageVariables = new HashMap<>();
         List<Person> list;
-        UserJDBCDao userJDBCDao = new UserJDBCDao();
-        list = userJDBCDao.getAllPersons();
+        list = personService.getAll();
 
         pageVariables.put("users", list);
+        resp.setContentType("text/html;charset=UTF-8");
         resp.getWriter().println(PageGenerator.instance().getPage("users.html", pageVariables));
+    }
+
+    public void setPersonService(PersonService personService) {
+        this.personService = personService;
     }
 }
