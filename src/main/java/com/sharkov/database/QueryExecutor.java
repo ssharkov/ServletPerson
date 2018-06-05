@@ -14,6 +14,7 @@ public class QueryExecutor {
             ResultSet resultSet = statement.executeQuery("Select * from Persons");
             while (resultSet.next()) {
                 Person person = new Person();
+                person.setId(Integer.parseInt(resultSet.getString("id")));
                 person.setName(resultSet.getString("Name"));
                 person.setLastName(resultSet.getString("LastName"));
                 person.setSalary(Integer.parseInt(resultSet.getString("Salary")));
