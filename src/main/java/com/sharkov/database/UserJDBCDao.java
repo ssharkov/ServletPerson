@@ -14,10 +14,10 @@ public class UserJDBCDao {
             ResultSet resultSet = statement.executeQuery("Select * from Persons");
             while (resultSet.next()) {
                 Person person = new Person();
-                person.setId(Integer.parseInt(resultSet.getString("id")));
+                person.setId(resultSet.getInt("id"));
                 person.setName(resultSet.getString("Name"));
                 person.setLastName(resultSet.getString("LastName"));
-                person.setSalary(Integer.parseInt(resultSet.getString("Salary")));
+                person.setSalary(resultSet.getInt("Salary"));
                 list.add(person);
             }
             resultSet.close();
